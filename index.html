@@ -46,8 +46,8 @@
 
   <div class="video-section">
     <div class="video-title">Nature Relaxation</div>
-    <iframe
-      src="https://www.youtube.com/embed/iDcPh6y9rsk?playlist=iDcPh6y9rsk&autoplay=1&loop=1&controls=0&rel=0&modestbranding=1"
+    <iframe id="video1"
+      src="https://www.youtube.com/embed/iDcPh6y9rsk?controls=1&rel=0&modestbranding=1&enablejsapi=1"
       allow="autoplay; fullscreen"
       allowfullscreen>
     </iframe>
@@ -55,12 +55,46 @@
 
   <div class="video-section">
     <div class="video-title">Ocean Calm</div>
-    <iframe
-      src="https://www.youtube.com/embed/dIMZM96Fw3o?playlist=dIMZM96Fw3o&autoplay=1&loop=1&controls=0&rel=0&modestbranding=1"
+    <iframe id="video2"
+      src="https://www.youtube.com/embed/dIMZM96Fw3o?controls=1&rel=0&modestbranding=1&enablejsapi=1"
       allow="autoplay; fullscreen"
       allowfullscreen>
     </iframe>
   </div>
+
+  <script>
+    // Load YouTube Player API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player1, player2;
+
+    function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player('video1', {
+        events: {
+          'onStateChange': function(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              player1.seekTo(0);
+              player1.playVideo();
+            }
+          }
+        }
+      });
+
+      player2 = new YT.Player('video2', {
+        events: {
+          'onStateChange': function(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              player2.seekTo(0);
+              player2.playVideo();
+            }
+          }
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
